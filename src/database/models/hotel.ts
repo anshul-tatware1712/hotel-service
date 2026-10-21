@@ -1,9 +1,6 @@
-import Sequelize, { DataTypes, Model } from "@sequelize/core";
+import { DataTypes, Model } from "@sequelize/core";
 import type { InferAttributes, InferCreationAttributes, CreationOptional } from "@sequelize/core";
 import { Attribute, PrimaryKey, AutoIncrement, NotNull } from "@sequelize/core/decorators-legacy";
-import { MySqlDialect } from "@sequelize/mysql";
-
-const sequelize = new Sequelize({ dialect: MySqlDialect });
 
 export class Hotel extends Model<InferAttributes<Hotel>, InferCreationAttributes<Hotel>> {
   @Attribute(DataTypes.INTEGER)
