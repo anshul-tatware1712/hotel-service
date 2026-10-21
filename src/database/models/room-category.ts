@@ -2,7 +2,7 @@ import { DataTypes, Model } from "@sequelize/core";
 import type { InferAttributes, InferCreationAttributes, CreationOptional } from "@sequelize/core";
 import { Attribute, PrimaryKey, AutoIncrement, NotNull, Default, Table } from "@sequelize/core/decorators-legacy";
 
-enum RoomType {
+export enum RoomType {
   SINGLE = "SINGLE",
   DOUBLE = "DOUBLE",
   FAMILY = "FAMILY",
