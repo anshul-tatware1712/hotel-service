@@ -1,14 +1,40 @@
 import logger from "#config/logger.js";
 import { Hotel } from "#database/models/hotel.js";
-import type { hotelDto } from "#dto/hotel.dto.js";
+import { NotFoundError } from "#utils/app.errors.js";
+import { BaseRepository } from "./base.repository.js";
 
-export const createHotel = async (hotelData: hotelDto): Promise<Hotel> => {
-  const hotel = await Hotel.create({
-    name: hotelData.name,
-    address: hotelData.address,
-    city: hotelData.city,
-    country: hotelData.country,
-  });
-  logger.info(`Hotel created with ID: ${hotel.id}`);
-  return hotel;
-};
+export class HotelRepository extends BaseRepository<Hotel> {
+  constructor() {
+    super(Hotel);
+  }
+
+  async findAll() {
+    const hotels = await this.model.findAll({
+      where: {
+        deletedAt: null,
+      },
+    });
+
+    if (!hotels) {
+      logger.error(`No hotels found`);
+      throw new NotFoundError(`No hotels found`);
+    }
+
+    logger.info(`Hotels found: ${hotels.length}`);
+    return hotels;
+  }
+
+  async softDelete(id: number) {
+    const hotel = await this.model.findByPk(id);
+
+    if (!hotel) {
+      logger.error(`Hotel not found: ${id}`);
+      throw new NotFoundError(`Hotel with id ${id} not found`);
+    }
+
+    hotel.deletedAt = new Date();
+    await hotel.save();
+    logger.info(`Hotel soft deleted: ${hotel.id}`);
+    return true;
+  }
+}

@@ -37,6 +37,7 @@
     "@sequelize/mysql": "^7.0.0-alpha.48",
     "@types/winston": "^2.4.4",
     "express": "^5.2.1",
+    "http-status-codes": "^2.3.0",
     "mysql2": "^3.24.4",
     "sequelize": "^6.37.8",
     "winston": "^3.19.0",

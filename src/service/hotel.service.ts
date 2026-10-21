@@ -1,8 +1,29 @@
-import type { Hotel } from "#database/models/hotel.js";
 import type { hotelDto } from "#dto/hotel.dto.js";
-import { createHotel } from "#repository/hotel.repository.js";
+import { HotelRepository } from "#repository/hotel.repository.js";
 
-export const addHotel = async (hotelData: hotelDto): Promise<Hotel> => {
-  const result = await createHotel(hotelData);
-  return result;
-};
+const hotelRepository = new HotelRepository();
+
+export async function createHotelService(hotelData: hotelDto) {
+  const hotel = await hotelRepository.create(hotelData);
+  return hotel;
+}
+
+export async function getHotelByIdService(id: number) {
+  const hotel = await hotelRepository.findById(id);
+  return hotel;
+}
+
+export async function getAllHotelsService() {
+  const hotels = await hotelRepository.findAll();
+  return hotels;
+}
+
+export async function deleteHotelService(id: number) {
+  const response = await hotelRepository.softDelete(id);
+  return response;
+}
+
+export async function updateHotelService(id: number, hotelData: Partial<hotelDto>) {
+  const hotel = await hotelRepository.update(id, hotelData);
+  return hotel;
+}

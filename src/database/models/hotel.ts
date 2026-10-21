@@ -29,4 +29,7 @@ export class Hotel extends Model<InferAttributes<Hotel>, InferCreationAttributes
 
   @Attribute(DataTypes.DATE)
   declare updatedAt: CreationOptional<Date>;
+
+  @Attribute(DataTypes.DATE)
+  declare deletedAt: CreationOptional<Date | null>;
 }
