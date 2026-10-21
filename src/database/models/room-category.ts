@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "@sequelize/core";
 import type { InferAttributes, InferCreationAttributes, CreationOptional } from "@sequelize/core";
-import { Attribute, PrimaryKey, AutoIncrement, NotNull, Default, Table } from "@sequelize/core/decorators-legacy";
+import { Attribute, PrimaryKey, AutoIncrement, NotNull, Table } from "@sequelize/core/decorators-legacy";
 
 export enum RoomType {
   SINGLE = "SINGLE",
@@ -39,7 +39,6 @@ export class RoomCategory extends Model<InferAttributes<RoomCategory>, InferCrea
   declare updatedAt: CreationOptional<Date>;
 
   @Attribute(DataTypes.DATE)
-  @Default(null)
   declare deletedAt: CreationOptional<Date> | null;
 }
 

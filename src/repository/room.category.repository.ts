@@ -7,6 +7,6 @@ export class RoomCategoryRepository extends BaseRepository<RoomCategory> {
   }
 
   async findAllByHotelId({ hotelId }: { hotelId: number }) {
-    return this.model.findAll({ where: { hotelId } });
+    return this.model.findAll({ where: { hotelId, deletedAt: null } });
   }
 }
